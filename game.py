@@ -12,7 +12,7 @@ class Game:
         self.plist = [p1,p2,p3]
     def prepare(self):
         #发牌
-        all_cards = list(range(3,16)) * 4 + [16,16]
+        all_cards = list(range(3,16)) * 4 + [16,17]
         shuffle(all_cards)
         self.handlist = [all_cards[0:20],all_cards[20:37],all_cards[37:54]]
         for pid in range(3):    
