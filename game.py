@@ -1,6 +1,7 @@
 #!/usr/bin/python3
  
 from player import Player
+from random import shuffle
 
 class Game:
     def __init__(self):
@@ -9,10 +10,11 @@ class Game:
         p2 = Player("yzq")
         p3 = Player("lhr")
         self.plist = [p1,p2,p3]
-        self.handlist = []
     def prepare(self):
         #发牌
-        self.handlist = [[1,2,3,4],[5,6],[1,3,5,7]]
+        all_cards = list(range(3,16)) * 4 + [16,16]
+        shuffle(all_cards)
+        self.handlist = [all_cards[0:20],all_cards[20:37],all_cards[37:54]]
         for pid in range(3):    
             self.plist[pid].get(self.handlist[pid])
     def start(self):
