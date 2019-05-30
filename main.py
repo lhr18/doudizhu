@@ -3,7 +3,8 @@
 from game import Game
 
 mygame = Game()
-for turn in range(2):
-    mygame.prepare()
-    winner = mygame.start()
-    print("winner is " + winner)
+#for turn in range(1):
+    
+mygame.prepare()
+winner = mygame.start()
+print("winner is " + winner)

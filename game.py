@@ -10,6 +10,10 @@ class Game:
         p2 = Player("yzq")
         p3 = Player("lhr")
         self.plist = [p1,p2,p3]
+        #本轮出牌
+        self.curr_player = 0 #TODO: note
+        self.curr_combo = "null"
+        self.curr_score = 0
     def prepare(self):
         #发牌
         all_cards = list(range(3,16)) * 4 + [16,17]
@@ -17,18 +21,27 @@ class Game:
         self.handlist = [all_cards[0:20],all_cards[20:37],all_cards[37:54]]
         for pid in range(3):    
             self.plist[pid].get(self.handlist[pid])
+        #展示初始手牌
+        for pid in range(3):    
+            print(self.plist[pid].name+":")
+            print(sorted(self.handlist[pid]))
+        
     def start(self):
+        #TODO:check illegal
         while 1:
             for pid in range(3):
-                throw_card = self.plist[pid].throw()
-                if throw_card != -1:
-                    #TODO:if you have this card
-                    #打出一手牌
-                    print(self.plist[pid].name+":"+str(throw_card))
-                    self.handlist[pid].remove(throw_card)
-                    #判定游戏是否结束
-                    if(len(self.handlist[pid])==0):
-                        return self.plist[pid].name
+                if self.curr_player != pid:
+                    throw_card = self.plist[pid].throw(self.curr_combo, self.curr_score)
                 else:
-                    print("不要")
+                    throw_card = self.plist[pid].throw('null', self.curr_score)
+                #TODO:check the winner
+                if throw_card[0] == 'winner':
+                    return self.plist[pid].name
+                if throw_card[0] == 'pass':
+                    print("不要")    
+                else:
+                    self.curr_player = pid
+                    self.curr_combo = throw_card[0]
+                    self.curr_score = throw_card[1]
+                    print(self.plist[pid].name+":"+throw_card[0]+str(throw_card[1]))
                 

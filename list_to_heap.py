@@ -1,5 +1,6 @@
+#已经转移成了player的成员函数
 #translate cardlist to cardheap
-clist = [3,3,3,3,4,4,4,4,6,6,6,8,9,10,11,12,12]
+clist = [3,3,7,3,4,9,4,4,6,6,6,8,9,10,11,12,12]
 def list_to_heap(c_list):
     c_heap = []
     for i in range(3,18):
